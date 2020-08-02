@@ -4,20 +4,20 @@ import datetime
 
 class Ground(models.Model):
     DISTRICTS = [
-        'Приволжский',
-        'Московский',
-        'Советский',
-        'Вахитовский',
-        'Ново-Савиновский',
-        'Кировский',
-        'Авиастроительный'
+        ('Приволжский', 'Приволжский'),
+        ('Московский', 'Московский'),
+        ('Советский', 'Советский'),
+        ('Вахитовский', 'Вахитовский'),
+        ('Ново-Савиновский', 'Ново-Савиновский'),
+        ('Кировский', 'Кировский'),
+        ('Авиастроительный', 'Авиастроительный')
     ]
 
     TYPES = [
-        'Футбол',
-        'Баскетбол',
-        'Волейбол',
-        'Хоккей'
+        ('Футбол', 'Футбол'),
+        ('Баскетбол', 'Баскетбол'),
+        ('Волейбол', 'Волейбол'),
+        ('Хоккей', 'Хоккей')
     ]
 
     district = models.CharField(max_length=20, choices=DISTRICTS)
@@ -28,14 +28,17 @@ class Ground(models.Model):
     main_image = models.ImageField()
     types = models.CharField(max_length=20, choices=TYPES)
 
-    def add_or_edit(self, dis=district, crd=coordinates, sh_desc=short_description, ln_desc=long_description, img=main_image, tps=types):
-        self.district = dis
-        self.coordinates = crd
-        self.short_description = sh_desc
-        self.long_description = ln_desc
+    def add_or_edit(self, request):
+        self.district = request.POST.get('dis')
+        self.coordinates = request.POST.get('crd')
+        self.short_description = request.POST.get('sh_desc')
+        self.long_description = request.POST.get('ln_desc')
         self.last_update = datetime.datetime.now()
-        self.main_image = img
-        self.types = tps
+        img = request.FILES.get('img')
+        if img:
+            self.main_image = img
+        self.types = request.POST.get('tps')
+        self.save()
 
     def __str__(self):
         return self.short_description

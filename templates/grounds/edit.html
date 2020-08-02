@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Изменить площадку
+{% endblock %}
+
+{% block maincontent %}
+{% if edited %}
+Площадка успешно изменена
+{% else %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>
+        <select name="dis" required>
+        {% for district in districts %}
+            {% if district.0 == ground.district %}
+            <option selected value="{{ district.0 }}">{{ district.0 }}</option>
+            {% else %}
+            <option value="{{ district.0 }}">{{ district.0 }}</option>
+            {% endif %}
+        {% endfor %}
+        </select>
+    </p>
+    <p>
+        <input name="sh_desc" type="text" value="{{ ground.short_description }}" required>
+    </p>
+    <p>
+        <textarea name="ln_desc" required>{{ ground.long_description }}</textarea>
+    </p>
+    <p>
+        <input name="crd" type="text" value="{{ ground.coordinates }}" required>
+    </p>
+    {% if ground.main_image %}
+    <p>
+        <img src="{{ ground.main_image.url }}" width="350">
+    </p>
+    {% endif %}
+    <p>
+        <input name="img" type="file" accept="image/*">
+    </p>
+    <p>
+        <select name="tps" required>
+        {% for type in types %}
+            <option value="{{ type.0 }}">{{ type.0 }}</option>
+        {% endfor %}
+        </select>
+    </p>
+    <button type="submit">Изменить</button>
+</form>
+{% endif %}
+{% endblock %}

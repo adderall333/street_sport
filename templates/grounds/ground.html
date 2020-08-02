@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Площадка
+{% endblock %}
+
+{% block maincontent %}
+{% if ground %}
+<div>
+    <p>{{ ground.short_description }}</p>
+    <p>{{ ground.long_description }}</p>
+    <p>Последнее изменение: {{ ground.last_update }}</p>
+    <p>Район: {{ ground.district }}</p>
+    <p>Тип: {{ ground.types }}</p>
+    {% if ground.main_image %}
+    <p><img src="{{ ground.main_image.url }}" width="350"></p>
+    {% endif %}
+    <a href="edit/">Изменить</a>
+</div>
+{% else %}
+Такой площадки не существует
+{% endif %}
+{% endblock %}
