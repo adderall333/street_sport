@@ -3,3 +3,63 @@
 {% block title %}
 Главная страница
 {% endblock %}
+
+{% block maincontent %}
+<div class="container">
+    <div class="desc1">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="desc1-header">
+                    О проекте
+                </div>
+                <div class="desc1-separator"></div>
+                <div class="desc1-text">
+                    Мы помогаем найти подходящую спортивную площадку, чтобы вы с друзьями могли поиграть в своё удовольствие на свежем воздухе и абсолютно бесплатно
+                </div>
+            </div>
+            <div class="col">
+                <div class="desc1-image" style="background-image: url(static/main/desc1.jpg);"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="desc2" style="background-image: url(/static/main/desc2.png);">
+    <div class="container row align-items-center">
+        <div class="col">
+            <div class="desc2-header">
+                Узнать о состоянии площадки
+            </div>
+            <div class="desc2-text">
+                Вы сами следите за актуальностью информации на сайте. Если вдруг площадка выглядит совсем не так, как описано у нас, то вы можете сами отредактировать описание или добавить актуальные фотографии и их увидят все.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="desc3">
+        <div class="row">
+            <div class="col">
+                <div class="desc3-header">
+                    Площадки Казани
+                </div>
+                <div class="desc3-text">
+                    Если вы не нашли у нас какую-то площадку, то просто добавьте её сами, чтобы другие спортсмены знали о её существовании
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for type in types %}
+            <div class="col">
+                <img class="ico" src="static/main/{{ type.1 }}.svg">
+                <div class="desc3-stat-header">
+                    {{ type.0 }}
+                </div>
+                <div class="desc3-stat-text">
+                    Площадок: {{ type.2 }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

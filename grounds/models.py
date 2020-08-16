@@ -1,4 +1,5 @@
 from django.db import models
+
 import datetime
 
 
@@ -14,10 +15,10 @@ class Ground(models.Model):
     ]
 
     TYPES = [
-        ('Футбол', 'Футбол'),
-        ('Баскетбол', 'Баскетбол'),
-        ('Волейбол', 'Волейбол'),
-        ('Хоккей', 'Хоккей')
+        ('Футбол', 'football'),
+        ('Баскетбол', 'basketball'),
+        ('Волейбол', 'volleyball'),
+        ('Хоккей', 'hockey')
     ]
 
     district = models.CharField(max_length=20, choices=DISTRICTS)

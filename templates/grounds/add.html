@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block script %}
-<script src="https://api-maps.yandex.ru/2.1/?apikey=ed9ee632-4f57-4dd1-ad11-59fae15159cd&lang=ru_RU" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
 <script type="text/javascript">
-    ymaps.ready(init);
+    //ymaps.ready(init);
     function init(){
         var myMap = new ymaps.Map("map", {
             center: [55.79717499, 49.10240174],
@@ -36,39 +36,53 @@
 {% endblock %}
 
 {% block maincontent %}
-{% if added %}
-Площадка успешно добавлена
-{% else %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>
-        <select name="dis" required>
-        {% for district in districts %}
-            <option value="{{ district.0 }}">{{ district.0 }}</option>
-        {% endfor %}
-        </select>
-    </p>
-    <p>
-        <input name="sh_desc" type="text" placeholder="Краткое описание" required>
-    </p>
-    <p>
-        <textarea name="ln_desc" placeholder="Длинное описание" required></textarea>
-    </p>
-    <p>
-        <input name="crd" type="text" placeholder="Координаты" required>
-    </p>
-    <p>
-        <input name="img" type="file" accept="image/*" required>
-    </p>
-    <p>
-        <select name="tps" required>
-        {% for type in types %}
-            <option value="{{ type.0 }}">{{ type.0 }}</option>
-        {% endfor %}
-        </select>
-    </p>
-    <button type="submit">Добавить</button>
-</form>
-<div id="map" style="width: 600px; height: 600px"></div>
-{% endif %}
+<div class="cover" style="background-image: url(../../static/main/dadaya.jpg);">
+    <div class="form-container">
+        <div class="form-header">
+            Добавление площадки
+        </div>
+        <div class="form-text">
+            Если в системе еще нет знакомой вам площадки - добавьте её сами!
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Район</label>
+                <select name="dis" class="custom-select" required>
+                    {% for district in districts %}
+                    <option value="{{ district.0 }}">{{ district.0 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Тип</label>
+                <select name="tps" class="custom-select" required>
+                {% for type in types %}
+                    <option value="{{ type.0 }}">{{ type.0 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Краткое описание</label>
+                <input name="sh_desc" type="text" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label>Длинное описание</label>
+                <textarea name="ln_desc" class="form-control" style="height: 102px;" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Координаты</label>
+                <input name="crd" type="text" class="form-control" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label>Фото</label>
+                <div class="add-file">
+                    Загрузить файлы
+                    <input name="img" type="file" accept="image/*" class="custom-file-input" required>
+                </div>
+            </div>
+            <button type="submit" class="btn">Добавить</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

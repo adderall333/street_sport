@@ -5,19 +5,35 @@
 {% endblock %}
 
 {% block maincontent %}
-{% if grounds.count > 0 %}
-{% for ground in grounds %}
-    <div>
-        <p><a href="{{ ground.id }}/">{{ ground.short_description }}</a></p>
-        <p>Последнее изменение: {{ ground.last_update }}</p>
-        <p>Район: {{ ground.district }}</p>
-        <p>Тип: {{ ground.types }}</p>
-        {% if ground.main_image %}
-        <p><img src="{{ ground.main_image.url }}" width="350"></p>
-        {% endif %}
+<div class="grounds">
+    <div class="container">
+        <div class="grounds-list">
+            {% if grounds.count > 0 %}
+            {% for ground in grounds %}
+            <div class="row">
+                <div class="col-5">
+                    <img src="{{ ground.main_image.url }}" width="460" height="345">
+                </div>
+                <div class="col-7">
+                    <div class="desc-district">
+                        {{ ground.district }} район
+                    </div>
+                    <div class="desc-header">
+                        {{ ground.short_description }}
+                    </div>
+                    <div class="desc-text">
+                        {{ ground.long_description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            Площадок нема
+            {% endif %}
+        </div>
+        <div class="add-btn-container">
+            <a href="add/" class="add-btn"><table><tr><td>Добавить площадку</td></tr></table></a>
+        </div>
     </div>
-{% endfor %}
-{% else %}
-    Площадок нема
-{% endif %}
+</div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
+
 from .models import Ground
+from sport_grounds.secret_key import apikey
 
 
 def grounds(request):
@@ -23,7 +25,8 @@ def add(request):
         return render(request, 'grounds/add.html', {
             'added': False,
             'districts': Ground.DISTRICTS,
-            'types': Ground.TYPES
+            'types': Ground.TYPES,
+            'key': apikey
         })
 
 
