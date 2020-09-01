@@ -66,7 +66,6 @@
 }
 
 .desc1-header {
-    margin-bottom: 24px;
     font-size: 42px;
     line-height: 1.23;
     font-family: 'Roboto',Arial,sans-serif;
@@ -75,6 +74,8 @@
 }
 
 .desc1-separator {
+    margin-top: 24px;
+    margin-bottom: 23px;
     background-color: #222222;
     max-width: 50px;
     width: 100%;
@@ -84,7 +85,6 @@
 
 .desc1-text {
     max-width: 500px;
-    margin-top: 23px;
     font-size: 20px;
     line-height: 1.55;
     font-family: 'Roboto',Arial,sans-serif;
@@ -236,20 +236,25 @@ font-family: 'Arial';
 }
 
 .desc-header {
-    font-family: 'Arial';
     margin-bottom: 23px;
+}
+
+.desc-header a,
+.desc-header a:hover {
+    font-family: 'Arial';
     font-size: 30px;
     line-height: 1.17;
     font-weight: 600;
     color: #000;
+    text-decoration: none;
 }
 
-.add-btn-container {
+.add-or-edit-btn-container {
     margin-top: 105px;
 }
 
-.add-btn,
-.add-btn:hover {
+.add-or-edit-btn,
+.add-or-edit-btn:hover {
     display: inline-block;
     border-radius: 100px;
     color: #ffffff;
@@ -263,7 +268,7 @@ font-family: 'Arial';
     font-weight: 700;
 }
 
-.add-btn table {
+.add-or-edit-btn table {
     width: 100%;
     height: 100%;
 }
@@ -346,14 +351,142 @@ font-family: 'Arial';
 }
 
 .add-file {
-    color: #ffffff;
     background-color: #ff7300;
     border-radius: 7px;
+    height: 38px;
+    width: 170px;
+    padding: 7px;
+    position: relative;
+    text-align: center;
+}
+
+.add-file label {
+    color: #ffffff;
     font-family: Roboto, Arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
-    height: 38px;
-    width: 170px;
-    text-align: center;
-    padding: 7px;
+    cursor: pointer;
+}
+
+.img-input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.ground {
+    padding-top: 135px;
+}
+
+.main-img {
+    height: 495px;
+    width: 660px;
+    background-size: cover;
+    background-position: center;
+}
+
+.mini-img {
+    height: 60px;
+    width: 60px;
+    margin-right: 5px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+}
+
+.mini-img:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.ground-desc-header {
+    margin-bottom: 18px;
+    font-size: 24px;
+    line-height: 1.35;
+    font-family: 'Roboto',Arial,sans-serif;
+    font-weight: 600;
+    color: #ff9f1c;
+}
+
+.ground-desc-text,
+.close-ground-text {
+    margin-top: 20px;
+    font-size: 20px;
+    line-height: 1.55;
+    font-family: 'Roboto',Arial,sans-serif;
+    font-weight: 300;
+    color: #000;
+}
+
+.ground-desc-text a,
+.close-ground-text a {
+    font-family: 'Roboto',Arial,sans-serif;
+    font-weight: 300;
+    color: #3d3d3d;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ground-desc-text a:hover,
+.close-ground-text a:hover {
+    color: #000;
+}
+
+.ground-map {
+    height: 450px;
+    width: 660px;
+}
+
+.close-ground {
+    height: 110px;
+    margin-bottom: 20px;
+}
+
+.close-ground-image {
+    height: 110px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ground-edit {
+    height: 160px;
+}
+
+.ground-edit-text {
+    color: #ff9f1c;
+    font-family: 'Arial';
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.filters {
+    margin-bottom: 60px;
+}
+
+.filters select {
+    width: 150px;
+    height: 40px;
+}
+
+.filters-btn {
+    display: inline-block;
+    border-radius: 100px;
+    border: none;
+    color: #ffffff;
+    background-color: #ff9f1c;
+    text-decoration: none;
+    font-family: 'Roboto',Arial,sans-serif;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-weight: 700;
+}
+
+.custom-select:focus {
+    border-color: #ff9f1c;
+    box-shadow: 0 0 10px #ff9f1c
 }

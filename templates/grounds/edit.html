@@ -5,47 +5,112 @@
 {% endblock %}
 
 {% block maincontent %}
-{% if edited %}
-Площадка успешно изменена
-{% else %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>
-        <select name="dis" required>
-        {% for district in districts %}
-            {% if district.0 == ground.district %}
-            <option selected value="{{ district.0 }}">{{ district.0 }}</option>
-            {% else %}
-            <option value="{{ district.0 }}">{{ district.0 }}</option>
-            {% endif %}
-        {% endfor %}
-        </select>
-    </p>
-    <p>
-        <input name="sh_desc" type="text" value="{{ ground.short_description }}" required>
-    </p>
-    <p>
-        <textarea name="ln_desc" required>{{ ground.long_description }}</textarea>
-    </p>
-    <p>
-        <input name="crd" type="text" value="{{ ground.coordinates }}" required>
-    </p>
-    {% if ground.main_image %}
-    <p>
-        <img src="{{ ground.main_image.url }}" width="350">
-    </p>
-    {% endif %}
-    <p>
-        <input name="img" type="file" accept="image/*">
-    </p>
-    <p>
-        <select name="tps" required>
-        {% for type in types %}
-            <option value="{{ type.0 }}">{{ type.0 }}</option>
-        {% endfor %}
-        </select>
-    </p>
-    <button type="submit">Изменить</button>
-</form>
-{% endif %}
+<div class="cover" style="background-image: url(../../../static/main/dadaya.jpg);">
+    <div class="form-container">
+        <div class="form-header">
+            Изменение площадки
+        </div>
+        <div class="form-text">
+            Если данные на сайте не совпадают с реальностью - отредактируйте их!
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Район</label>
+                <select name="dis" class="custom-select" required>
+                    {% for district in districts %}
+                    {% if ground.district == district.0 %}
+                    <option value="{{ district.0 }}" selected>{{ district.0 }}</option>
+                    {% else %}
+                    <option value="{{ district.0 }}">{{ district.0 }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Тип</label>
+                <select name="tps" class="custom-select" required>
+                    {% for type in types %}
+                    {% if ground.type == type.0 %}
+                    <option value="{{ type.0 }}" selected>{{ type.0 }}</option>
+                    {% else %}
+                    <option value="{{ type.0 }}">{{ type.0 }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Краткое описание</label>
+                <input name="sh_desc" type="text" class="form-control" autocomplete="off" placeholder="{{ ground.short_description }}" required>
+            </div>
+            <div class="form-group">
+                <label>Длинное описание</label>
+                <textarea name="ln_desc" class="form-control" style="height: 102px;" placeholder="{{ ground.long_description }}" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Координаты</label>
+                <input name="crd" type="text" class="form-control" autocomplete="off" placeholder="{{ ground.coordinates }}" required>
+            </div>
+            <div class="form-group">
+                <div class="add-file">
+                    <input name="img" type="file" accept="image/*" id="img-input" class="img-input" required multiple>
+                    <label for="img-input" id="img-input-label">
+                        Добавить фото
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn">Добавить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    //ymaps.ready(init);
+    function init(){
+        var myMap = new ymaps.Map("map", {
+            center: [55.79717499, 49.10240174],
+            zoom: 11
+        });
+
+        myMap.events.add('click', function (e) {
+            if (!myMap.balloon.isOpen()) {
+                var coords = e.get('coords');
+                myMap.balloon.open(coords, {
+                    contentHeader:'Событие!',
+                    contentBody:'<p>Кто-то щелкнул по карте.</p>' +
+                        '<p>Координаты щелчка: ' + [
+                        coords[0].toPrecision(6),
+                        coords[1].toPrecision(6)
+                        ].join(', ') + '</p>',
+                    contentFooter:'<sup>Щелкните еще раз</sup>'
+                });
+            }
+            else {
+                myMap.balloon.close();
+            }
+        });
+    }
+
+    var control = document.getElementById("img-input");
+    var label = document.getElementById("img-input-label")
+    control.addEventListener("change", function(event) {
+        len = control.files.length;
+        switch (len) {
+            case 1:
+                label.innerText = "Загружен " + len + " файл";
+                break;
+            case 2:
+            case 3:
+            case 4:
+                label.innerText = "Загружено " + len + " файла";
+                break;
+            default:
+                label.innerText = "Загружено " + len + " файлов";
+                break;
+        }
+    }, false);
+</script>
 {% endblock %}

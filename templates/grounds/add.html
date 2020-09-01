@@ -4,37 +4,6 @@
 Добавить площадку
 {% endblock %}
 
-{% block script %}
-<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
-<script type="text/javascript">
-    //ymaps.ready(init);
-    function init(){
-        var myMap = new ymaps.Map("map", {
-            center: [55.79717499, 49.10240174],
-            zoom: 11
-        });
-
-        myMap.events.add('click', function (e) {
-            if (!myMap.balloon.isOpen()) {
-                var coords = e.get('coords');
-                myMap.balloon.open(coords, {
-                    contentHeader:'Событие!',
-                    contentBody:'<p>Кто-то щелкнул по карте.</p>' +
-                        '<p>Координаты щелчка: ' + [
-                        coords[0].toPrecision(6),
-                        coords[1].toPrecision(6)
-                        ].join(', ') + '</p>',
-                    contentFooter:'<sup>Щелкните еще раз</sup>'
-                });
-            }
-            else {
-                myMap.balloon.close();
-            }
-        });
-    }
-</script>
-{% endblock %}
-
 {% block maincontent %}
 <div class="cover" style="background-image: url(../../static/main/dadaya.jpg);">
     <div class="form-container">
@@ -75,14 +44,65 @@
                 <input name="crd" type="text" class="form-control" autocomplete="off" required>
             </div>
             <div class="form-group">
-                <label>Фото</label>
                 <div class="add-file">
-                    Загрузить файлы
-                    <input name="img" type="file" accept="image/*" class="custom-file-input" required>
+                    <input name="img" type="file" accept="image/*" id="img-input" class="img-input" required multiple>
+                    <label for="img-input" id="img-input-label">
+                        Добавить фото
+                    </label>
                 </div>
             </div>
             <button type="submit" class="btn">Добавить</button>
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    //ymaps.ready(init);
+    function init(){
+        var myMap = new ymaps.Map("map", {
+            center: [55.79717499, 49.10240174],
+            zoom: 11
+        });
+
+        myMap.events.add('click', function (e) {
+            if (!myMap.balloon.isOpen()) {
+                var coords = e.get('coords');
+                myMap.balloon.open(coords, {
+                    contentHeader:'Событие!',
+                    contentBody:'<p>Кто-то щелкнул по карте.</p>' +
+                        '<p>Координаты щелчка: ' + [
+                        coords[0].toPrecision(6),
+                        coords[1].toPrecision(6)
+                        ].join(', ') + '</p>',
+                    contentFooter:'<sup>Щелкните еще раз</sup>'
+                });
+            }
+            else {
+                myMap.balloon.close();
+            }
+        });
+    }
+
+    var control = document.getElementById("img-input");
+    var label = document.getElementById("img-input-label")
+    control.addEventListener("change", function(event) {
+        len = control.files.length;
+        switch (len) {
+            case 1:
+                label.innerText = "Загружен " + len + " файл";
+                break;
+            case 2:
+            case 3:
+            case 4:
+                label.innerText = "Загружено " + len + " файла";
+                break;
+            default:
+                label.innerText = "Загружено " + len + " файлов";
+                break;
+        }
+    }, false);
+</script>
 {% endblock %}

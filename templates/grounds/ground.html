@@ -4,20 +4,85 @@
 Площадка
 {% endblock %}
 
+
+
 {% block maincontent %}
 {% if ground %}
-<div>
-    <p>{{ ground.short_description }}</p>
-    <p>{{ ground.long_description }}</p>
-    <p>Последнее изменение: {{ ground.last_update }}</p>
-    <p>Район: {{ ground.district }}</p>
-    <p>Тип: {{ ground.types }}</p>
-    {% if ground.main_image %}
-    <p><img src="{{ ground.main_image.url }}" width="350"></p>
-    {% endif %}
-    <a href="edit/">Изменить</a>
+<div class="ground">
+    <div class="container">
+        <div class="row">
+            <div class="col-7">
+                <div class="main-img" id="mainImg" style="background-image: url({{ ground.main_image.url }});"></div>
+                <div class="imgs" id="imgs" onload="init()">
+                    {% for image in images %}
+                    <div class="mini-img" onclick="changeImage('{{ image.image.url }}')" style="background-image: url({{ image.image.url }});"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="ground-desc-header">
+                    {{ ground.short_description }}
+                </div>
+                <div class="ground-desc-text">
+                    <p>Район: <a href="/grounds">{{ ground.district }}</a></p>
+                    <p>Тип площадки: <a href="/grounds">{{ ground.type }}</a></p>
+                    <p>Последнее обновление: {{ ground.last_update }}</p>
+                    <div class="desc1-separator"></div>
+                    {{ ground.long_description|linebreaks }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <div id="map" class="ground-map"></div>
+            </div>
+            <div class="col-5">
+                <div class="ground-desc-header">
+                    Площадки рядом:
+                </div>
+                {% for grd in close_grounds %}
+                    <div class="row close-ground">
+                        <div class="col close-ground-image" style="background-image: url({{ grd.main_image.url }});"></div>
+                        <div class="col close-ground-text">
+                            <a href="/grounds/{{ grd.id }}">{{ grd.short_description }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row ground-edit align-items-center">
+            <div class="col-7 ground-edit-text">
+                Информация о состоянии площадки не совпадает с действительностью? Отредактируйте её сами!
+            </div>
+            <div class="col-5">
+                <div class="add-btn-container">
+                    <a href="edit/" class="add-or-edit-btn"><table><tr><td>Редактировать</td></tr></table></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% else %}
 Такой площадки не существует
 {% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    function changeImage(new_image) {
+        document.getElementById("mainImg").style = "background-image: url(" + new_image + ");"
+    }
+
+    function init(){
+        var myMap = new ymaps.Map("map", {
+            center: {{ coordinates }},
+            zoom: 16
+        });
+        placemark = new ymaps.Placemark({{ coordinates }}, {}, {})
+        myMap.geoObjects.add(placemark);
+    }
+
+    ymaps.ready(init);
+</script>
 {% endblock %}

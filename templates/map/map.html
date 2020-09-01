@@ -7,7 +7,7 @@
 {% block script %}
 <script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
 <script type="text/javascript">
-    //ymaps.ready(init);
+    ymaps.ready(init);
     function init(){
         var myMap = new ymaps.Map("map", {
             center: [55.79717499, 49.10240174],
@@ -36,5 +36,5 @@
 {% endblock %}
 
 {% block maincontent %}
-<div id="map" style="width: 600px; height: 600px">Тут будет карта</div>
+<div id="map" style="width: 600px; height: 600px"></div>
 {% endblock %}
