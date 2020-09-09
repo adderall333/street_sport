@@ -357,7 +357,7 @@ font-family: 'Arial';
 
 .main-img {
     height: 495px;
-    width: 660px;
+    max-width: 660px;
     background-size: cover;
     background-position: center;
 }
@@ -413,7 +413,7 @@ font-family: 'Arial';
 
 .ground-map {
     height: 450px;
-    width: 660px;
+    max-width: 660px;
 }
 
 .close-ground {
@@ -540,6 +540,14 @@ font-family: 'Arial';
         max-width: none;
     }
 
+    .ground {
+        padding-top: 70px;
+    }
+
+    .close-ground-image {
+        margin-left: 15px;
+    }
+
     .form-container {
         max-width: 576px;
     }
@@ -607,6 +615,14 @@ font-family: 'Arial';
 @media (max-width: 576px){
     .grounds {
         padding-top: 40px;
+    }
+
+    .main-img {
+        height: 400px;
+    }
+
+    .ground {
+        padding-top: 50px;
     }
 
     .form-container {
@@ -696,6 +712,27 @@ font-family: 'Arial';
 }
 
 @media (max-width: 390px){
+    .mini-img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .ground-desc-header {
+        font-size: 20px;
+    }
+
+    .ground-desc-text {
+        font-size: 15px;
+    }
+
+    .close-ground-text {
+        font-size: 15px;
+    }
+
+    .main-img {
+        height: 300px;
+    }
+
     .desc3-stat-header {
         font-size: 13px;
     }

@@ -11,7 +11,7 @@
 <div class="ground">
     <div class="container">
         <div class="row">
-            <div class="col-7">
+            <div class="col-md-7">
                 <div class="main-img" id="mainImg" style="background-image: url({{ ground.main_image.url }});"></div>
                 <div class="imgs" id="imgs" onload="init()">
                     {% for image in images %}
@@ -19,7 +19,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col-md-5">
                 <div class="ground-desc-header">
                     {{ ground.short_description }}
                 </div>
@@ -33,10 +33,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-7">
+            <div class="col-md-7">
                 <div id="map" class="ground-map"></div>
             </div>
-            <div class="col-5">
+            <div class="col-md-5">
                 <div class="ground-desc-header">
                     Площадки рядом:
                 </div>
@@ -51,10 +51,10 @@
             </div>
         </div>
         <div class="row ground-edit align-items-center">
-            <div class="col-7 ground-edit-text">
+            <div class="col-sm-7 ground-edit-text">
                 Информация о состоянии площадки не совпадает с действительностью? Отредактируйте её сами!
             </div>
-            <div class="col-5">
+            <div class="col-sm-5">
                 <div class="add-btn-container">
                     <a href="edit/" class="add-or-edit-btn"><table><tr><td>Редактировать</td></tr></table></a>
                 </div>
