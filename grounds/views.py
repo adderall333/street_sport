@@ -11,11 +11,11 @@ def grounds(request):
         dis = request.POST.get('dis')
         tps = request.POST.get('tps')
         if dis == 'all':
-            grds = Ground.objects.filter(types=tps)
+            grds = Ground.objects.filter(type=tps)
         elif tps == 'all':
             grds = Ground.objects.filter(district=dis)
         else:
-            grds = Ground.objects.filter(types=tps, district=dis)
+            grds = Ground.objects.filter(type=tps, district=dis)
         return render(request, 'grounds/grounds.html', {'grounds': grds,
                                                         'districts': DISTRICTS,
                                                         'types': TYPES})

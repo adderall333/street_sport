@@ -23,7 +23,7 @@ TYPES = [
 
 class Ground(models.Model):
     district = models.CharField(max_length=20, choices=DISTRICTS)
-    coordinates = models.CharField(max_length=30)
+    coordinates = models.CharField(max_length=50)
     short_description = models.CharField(max_length=50)
     long_description = models.TextField()
     last_update = models.DateField()
@@ -31,11 +31,13 @@ class Ground(models.Model):
     type = models.CharField(max_length=20, choices=TYPES)
 
     def add(self, request):
+        """Заполняет и сохраняет объект площадки в БД"""
         self.district = request.POST.get('dis')
         self.coordinates = request.POST.get('crd')
         self.short_description = request.POST.get('sh_desc')
         self.long_description = request.POST.get('ln_desc')
         self.last_update = datetime.datetime.now()
+        self.save()
         imgs = request.FILES.getlist('img')
         if imgs:
             self.main_image = imgs[0]
@@ -48,6 +50,7 @@ class Ground(models.Model):
         self.save()
 
     def edit(self, request):
+        """Заполняет и сохраняет объект изменений площадки в БД"""
         changes = Changes()
         changes.ground = self
         changes.district = request.POST.get('dis')
@@ -65,12 +68,15 @@ class Ground(models.Model):
         changes.save()
 
     def get_x(self):
+        """Возвращает широту объекта площадки"""
         return float(self.coordinates.split()[0])
 
     def get_y(self):
+        """Возвращает долготу объекта площадки"""
         return float(self.coordinates.split()[1])
 
     def close_grounds(self):
+        """Возвращает три ближайшие площадки"""
         grounds = sorted(Ground.objects.exclude(id=self.id),
                          key=lambda ground: self.get_x() * self.get_y() + ground.get_x() * ground.get_y())
         if len(grounds) < 3:
@@ -114,6 +120,7 @@ class Image(models.Model):
     image = models.ImageField()
 
     def add(self, gr, img):
+        """Добавляет изображение к объекту площадки"""
         self.ground = gr
         self.image = img
 
@@ -126,23 +133,3 @@ class Image(models.Model):
         if self.image:
             storage, path = self.image.storage, self.image.path
             storage.delete(path)
-
-
-class Comment(models.Model):
-    ground = models.ForeignKey(Ground, on_delete=models.CASCADE)
-    pub_date = models.DateTimeField()
-    author = models.CharField(max_length=50)
-    text = models.TextField()
-
-    def add(self, gr, date, auth, txt):
-        self.ground = gr
-        self.pub_date = date
-        self.author = auth
-        self.text = txt
-
-    def __str__(self):
-        return self.text
-
-    class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'

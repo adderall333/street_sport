@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+На карте
+{% endblock %}
+
+{% block script %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ key }}&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init(){
+        var myMap = new ymaps.Map("map", {
+            center: [55.79717499, 49.10240174],
+            zoom: 11
+        });
+
+        var myGeoObjects = [];
+
+
+        {% for ground in data %}
+            myGeoObjects[{{ forloop.counter0 }}] = new ymaps.Placemark({{ ground.coords }}, {
+                balloonContentBody: [
+                    '<address>',
+                    '<p>',
+                    '<a class="ground-link" href="../grounds/',
+                    '{{ ground.id }}">',
+                    '{{ ground.desc }}',
+                    '</a>',
+                    '</p>',
+                    '<p>',
+                    '<img src="{{ ground.img.url }}" width="100px" height="100px">',
+                    '</p>',
+                    '</address>'
+                ].join('')
+            });
+        {% endfor %}
+
+
+        var myClusterer = new ymaps.Clusterer(
+          {clusterDisableClickZoom: false}
+        );
+        myClusterer.add(myGeoObjects);
+        myMap.geoObjects.add(myClusterer);
+    }
+</script>
+{% endblock %}
+
+{% block maincontent %}
+<div class="container">
+    <div id="map" class="map"></div>
+</div>
+{% endblock %}

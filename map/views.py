@@ -3,7 +3,10 @@ from grounds.models import Ground
 from sport_grounds.secret_key import apikey
 
 
-def map(request):
+def on_map(request):
     grounds = Ground.objects.all()
-    coordinates = [[ground.get_x(), ground.get_y()] for ground in grounds]
-    return render(request, 'map/map.html', {'coordinates': coordinates, 'key': apikey})
+    data = [{"coords": [ground.get_x(), ground.get_y()],
+             "desc": ground.short_description,
+             "img": ground.main_image,
+             "id": ground.id} for ground in grounds]
+    return render(request, 'map/on_map.html', {'key': apikey, 'data': data})

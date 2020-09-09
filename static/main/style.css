@@ -1,33 +1,17 @@
 .container {
     max-width: 1200px;
-    margin-left: 20px auto;
-    margin-right: 20px auto;
-}
-
-@media (max-width: 1200px){
-    .container {
-        max-width: 970px;
-    }
-}
-
-@media (max-width: 992px){
-    .container {
-        max-width: 750px;
-    }
-}
-
-@media (max-width: 767px){
-    .container {
-        max-width: none;
-    }
 }
 
 .navbar-container {
+    margin-left: auto;
+    margin-right: auto;
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
     position: fixed;
     z-index: 990;
 }
+
+.navbar-container-mobile
 
 .navbar {
     max-width: 1200px;
@@ -59,10 +43,6 @@
     padding-bottom: 180px;
     width: 100%;
     align-items: center;
-}
-
-.desc1 .row {
-    height: 560px;
 }
 
 .desc1-header {
@@ -105,7 +85,6 @@
     background-attachment: scroll;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100%;
 }
 
 .desc2 .row {
@@ -168,7 +147,6 @@
     margin-bottom: 25px;
     width: 100px;
     height: auto;
-    max-width: 100%;
 }
 
 .desc3-stat-header {
@@ -214,8 +192,6 @@
     margin-top: auto;
     margin-bottom: auto;
     max-width: 660px;
-    margin-left: 20px;
-    margin-right: 20px;
 }
 
 .desc-district {
@@ -242,11 +218,14 @@ font-family: 'Arial';
 .desc-header a,
 .desc-header a:hover {
     font-family: 'Arial';
-    font-size: 30px;
     line-height: 1.17;
     font-weight: 600;
     color: #000;
     text-decoration: none;
+}
+
+.desc-header {
+    font-size: 30px;
 }
 
 .add-or-edit-btn-container {
@@ -255,6 +234,7 @@ font-family: 'Arial';
 
 .add-or-edit-btn,
 .add-or-edit-btn:hover {
+    text-align: center;
     display: inline-block;
     border-radius: 100px;
     color: #ffffff;
@@ -263,8 +243,7 @@ font-family: 'Arial';
     font-family: 'Roboto',Arial,sans-serif;
     height: 60px;
     font-size: 16px;
-    padding-left: 60px;
-    padding-right: 60px;
+    width: 250px;
     font-weight: 700;
 }
 
@@ -274,7 +253,6 @@ font-family: 'Arial';
 }
 
 .cover {
-    height: 1240px;
     background-attachment: scroll;
     background-repeat: no-repeat;
     background-position: center center;
@@ -465,12 +443,19 @@ font-family: 'Arial';
     margin-bottom: 60px;
 }
 
-.filters select {
+.district,
+.type {
     width: 150px;
     height: 40px;
 }
 
+.grounds-img {
+    width: 460px;
+    height: 345px;
+}
+
 .filters-btn {
+    width: 190px;
     display: inline-block;
     border-radius: 100px;
     border: none;
@@ -481,12 +466,268 @@ font-family: 'Arial';
     height: 40px;
     font-size: 16px;
     margin-left: 30px;
-    padding-left: 60px;
-    padding-right: 60px;
     font-weight: 700;
 }
 
 .custom-select:focus {
     border-color: #ff9f1c;
     box-shadow: 0 0 10px #ff9f1c
+}
+
+.map {
+    padding-top: 10vh;
+    height: 80vh;
+}
+
+.ground-link {
+    color: #3d3d3d;
+    font-weight: 600;
+}
+
+.ground-link:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.add-map-btn {
+    color: #fff;
+    cursor: pointer;
+    width: auto;
+}
+
+.add-map-btn:hover {
+    text-decoration: underline;
+}
+
+.add-map {
+    display: none;
+    height: 300px;
+}
+
+@media (min-width: 769px) {
+    .navbar-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px){
+    .container {
+        max-width: 970px;
+    }
+
+    .desc-district {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 991px){
+    .container {
+        max-width: 768px;
+    }
+
+    .desc1 {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .desc1-image {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px){
+    .container {
+        max-width: none;
+    }
+
+    .form-container {
+        max-width: 576px;
+    }
+
+    .cover {
+        background-position-y: 0px;
+    }
+
+    .grounds {
+        padding-top: 70px;
+    }
+
+    .navbar-container {
+        position: relative;
+    }
+
+    .navbar-normal {
+        display: none;
+    }
+
+    .desc1 {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .desc1-header {
+        font-size: 36px;
+    }
+
+    .desc1-text {
+        padding-bottom: 40px;
+        font-size: 16px;
+    }
+
+    .desc2-header {
+        font-size: 25px;
+    }
+
+    .desc2-text {
+        font-size: 15px;
+    }
+
+    .desc3 {
+        padding-top: 75px;
+        padding-bottom: 45px;
+    }
+
+    .desc3-header {
+        font-size: 36px;
+    }
+
+    .desc3-text {
+        font-size: 18px;
+    }
+
+    .desc3-stat-header {
+        font-size: 25px;
+    }
+
+    .desc3-stat-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px){
+    .grounds {
+        padding-top: 40px;
+    }
+
+    .form-container {
+        max-width: 390px;
+    }
+
+    .desc-header {
+        font-size: 23px;
+    }
+
+    .desc-text {
+        font-size: 15px;
+    }
+
+    .col-sm-auto {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .grounds-img {
+        width: 350px;
+        height: 262px;
+    }
+
+    .district,
+    .type {
+        width: 100px;
+    }
+
+    .filters-btn {
+        width: 120px;
+    }
+
+    .desc1 {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .desc1-header {
+        font-size: 30px;
+    }
+
+    .desc1-text {
+        padding-bottom: 40px;
+        font-size: 15px;
+    }
+
+    .desc2 {
+        height: 350px;
+    }
+
+    .desc2-header {
+        font-size: 25px;
+        padding-bottom: 5px;
+    }
+
+    .desc2-text {
+        padding-top: 0px;
+        font-size: 15px;
+    }
+
+    .desc3 {
+        padding-top: 40px;
+        padding-bottom: 45px;
+    }
+
+    .desc3-header {
+        font-size: 30px;
+    }
+
+    .desc3-text {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .desc3-stat-header {
+        font-size: 15px;
+    }
+
+    .desc3-stat-text {
+        font-size: 10px;
+    }
+
+    .ico {
+        width: 75px;
+    }
+}
+
+@media (max-width: 390px){
+    .desc3-stat-header {
+        font-size: 13px;
+    }
+
+    .form-container {
+        max-width: 270px;
+    }
+
+    .desc3-stat-text {
+        font-size: 9px;
+    }
+
+    .filters-btn {
+        margin-left: 0px;
+        margin-top: 15px;
+        width: 200px;
+    }
+
+    .ico {
+        width: 50px;
+    }
+
+    .grounds-img {
+        width: 250px;
+        height: 187px;
+    }
+
+    .desc-header {
+        font-size: 20px;
+    }
+
+    .desc-text {
+        font-size: 13px;
+    }
 }

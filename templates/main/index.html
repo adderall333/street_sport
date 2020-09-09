@@ -8,7 +8,7 @@
 <div class="container">
     <div class="desc1">
         <div class="row align-items-center">
-            <div class="col">
+            <div class="col-lg-auto">
                 <div class="desc1-header">
                     О проекте
                 </div>
@@ -25,7 +25,7 @@
 </div>
 <div class="desc2" style="background-image: url(/static/main/desc2.png);">
     <div class="container row align-items-center">
-        <div class="col">
+        <div class="col-sm-auto">
             <div class="desc2-header">
                 Узнать о состоянии площадки
             </div>
@@ -37,8 +37,8 @@
 </div>
 <div class="container">
     <div class="desc3">
-        <div class="row">
-            <div class="col">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
                 <div class="desc3-header">
                     Площадки Казани
                 </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             {% for type in types %}
             <div class="col">
                 <img class="ico" src="static/main/{{ type.1 }}.svg">

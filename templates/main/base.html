@@ -14,22 +14,45 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
   </head>
   <body>
-    <div class="navbar-container">
-      <nav class="navbar navbar-light">
-        <a class="navbar-brand" href="/">Уличный спорт</a>
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" href="/grounds">Площадки</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/grounds/add">Добавить площадку</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/map">На карте</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        <div class="navbar-container navbar-normal">
+          <div class="container">
+            <nav class="navbar">
+              <a class="navbar-brand" href="/">Уличный спорт</a>
+                <ul class="nav justify-content-end">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/grounds">Площадки</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/grounds/add">Добавить площадку</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/map">На карте</a>
+                  </li>
+                </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="navbar-container navbar-mobile">
+          <nav class="navbar navbar-light navbar-expand-md">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Уличный спорт</a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+              <ul class="nav justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="/grounds">Площадки</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/grounds/add">Добавить площадку</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/map">На карте</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
     {% block maincontent %}{% endblock %}
     {% block script %}{% endblock %}
   </body>
