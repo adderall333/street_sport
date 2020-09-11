@@ -29,6 +29,7 @@ class Ground(models.Model):
     last_update = models.DateField()
     main_image = models.ImageField()
     type = models.CharField(max_length=20, choices=TYPES)
+    is_confirmed = models.BooleanField(default=False)
 
     def add(self, request):
         """Заполняет и сохраняет объект площадки в БД"""
@@ -47,6 +48,7 @@ class Ground(models.Model):
             image.image = img
             image.save()
         self.type = request.POST.get('tps')
+        self.is_confirmed = False
         self.save()
 
     def edit(self, request):

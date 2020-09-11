@@ -28,6 +28,7 @@
         <div class="grounds-list">
             {% if grounds.count > 0 %}
             {% for ground in grounds %}
+            {% if ground.is_confirmed %}
             <div class="row">
                 <div class="col-5">
                     <img class="grounds-img" src="{{ ground.main_image.url }}">
@@ -44,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
             {% else %}
             <h4>Таких площадок ещё нет, можете добавить их сами или ввести другие параметры фильтрации</h4>
